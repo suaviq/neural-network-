@@ -1,0 +1,3 @@
+﻿  neural_network.cpp
+D:\neural_network\neural_network\neural_network\matrices_vectors.h(35,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  neural_network.vcxproj -> D:\neural_network\neural_network\x64\Debug\neural_network.exe

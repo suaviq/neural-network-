@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "40172def-180f-40af-ac8f-859aa8007d51": {
+      "ProjectGuid": "40172def-180f-40af-ac8f-859aa8007d51",
+      "DisplayName": "neural_network",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
