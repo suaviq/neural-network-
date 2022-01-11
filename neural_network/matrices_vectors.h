@@ -29,7 +29,7 @@ double* multiply_mat_vec(int m, int n, double **matrix, double *vector)
 	return result;
 }
 
-void add_matrices(int m, int n, double **A, double **B, double **C)
+double** add_matrices(int m, int n, double **A, double **B, double **C)
 {
 	int i, j;
 	for (i = 0; i < m; i++)
@@ -40,9 +40,10 @@ void add_matrices(int m, int n, double **A, double **B, double **C)
 			cout << C[i][j] << endl;
 		}
 	}
+	return C;
 }
 
-void substract_matrices(int m, int n, double** A, double** B, double** C)
+double** substract_matrices(int m, int n, double** A, double** B, double** C)
 {
 	int i, j;
 	for (i = 0; i < m; i++)
@@ -53,9 +54,11 @@ void substract_matrices(int m, int n, double** A, double** B, double** C)
 			cout << C[i][j] << endl;
 		}
 	}
+
+	return C;
 }
 
-double sigmoid_matrix(int m, int n, double **x, double** Z)
+double** sigmoid_matrix(int m, int n, double **x, double** Z)
 {
 	int i, j;
 
@@ -67,10 +70,10 @@ double sigmoid_matrix(int m, int n, double **x, double** Z)
 			cout << Z[i][j]<<endl;
 		}
 	}
-	return 0;
+	return Z;
 }
 
-double relu_matrix(int m, int n, double** x, double** Z)
+double** relu_matrix(int m, int n, double** x, double** Z)
 {
 	int i, j;
 	for (i = 0; i < m; i++)
@@ -86,7 +89,7 @@ double relu_matrix(int m, int n, double** x, double** Z)
 			cout << Z[i][j]<<endl;
 		}
 	}
-	return 0;
+	return Z;
 }
 
 double** initialize_layer_weights(int m, int n)

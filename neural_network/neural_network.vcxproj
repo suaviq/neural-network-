@@ -22,6 +22,7 @@
     <ClCompile Include="neural_network.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="layer.h" />
     <ClInclude Include="matrices_vectors.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

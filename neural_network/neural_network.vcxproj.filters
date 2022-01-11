@@ -23,5 +23,8 @@
     <ClInclude Include="matrices_vectors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
