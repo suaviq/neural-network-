@@ -107,6 +107,47 @@ double** initialize_layer_weights(int m, int n)
 	return matrix;
 
 }
+double* initialize_layer_bias(int m)
+{
+	srand(time(0));
+	double* vector = new double[m];
+	for (int i = 0; i < m; i++) 
+	{
+		vector[i] = double((rand() % 100) - 50) / double(100);
+		cout << vector[i] << endl;
+	}
+	return vector;
+
+}
+
+double* zeros_1d(int m)
+{
+	srand(time(0));
+	double* vector = new double[m];
+	for (int i = 0; i < m; i++)
+	{
+		vector[i] = double(0);
+		cout << vector[i] << endl;
+	}
+	return vector;
+
+}
+//pochodne dla funkcji aktywacyjnej obu
+double** zeros_2d(int m, int n)
+{
+	double** matrix = new double* [m];
+	for (int i = 0; i < m; i++) {
+		matrix[i] = new double[n];
+		for (int j = 0; j < n; j++)
+		{
+			matrix[i][j] = double(0);
+			cout << matrix[i][j] << endl;
+		}
+	}
+	return matrix;
+
+}
+
 int main() 
 {
 	double matrix1[2][3] = {{1, -1, 2}, {0, -3, 0}};
