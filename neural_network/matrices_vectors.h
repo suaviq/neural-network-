@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// correct
 double* multiply_mat_vec(int m, int n, double **matrix, double *vector)
 {
 	double *result = new double[m];
@@ -30,11 +31,36 @@ double* multiply_mat_vec(int m, int n, double **matrix, double *vector)
 	return result;
 }
 
-double** add_matrices(int m, int n, double **A, double **B, double **C)
+double** multiply_matrix_by_constant(int m, int n, double constant, double** matrix)
+{
+	double** R = new double* [m];
+	for (int i = 0; i < m; i++)
+	{
+		R[i] = new double[n];
+		for (int j = 0; j < n; j++)
+		{
+			R[i][j] = constant + matrix[i][j];
+		}
+	}
+}
+
+double* multiply_vector_by_constant(int m, double constant, double* vector)
+{
+	double* R = new double[m];
+	for (int i = 0; i < m; i++)
+	{
+		R[i] = constant * vector[i];
+	}
+}
+ 
+// repaired
+double** add_matrices(int m, int n, double **A, double **B)
 {
 	int i, j;
+	double** C = new double*[m];
 	for (i = 0; i < m; i++)
 	{
+		C[i] = new double[n];
 		for (j = 0; j < n; j++)
 		{
 			C[i][j] = A[i][j] + B[i][j];
@@ -44,22 +70,25 @@ double** add_matrices(int m, int n, double **A, double **B, double **C)
 	return C;
 }
 
-double** substract_matrices(int m, int n, double** A, double** B, double** C)
+//repaired
+double** substract_matrices(int m, int n, double** A, double** B)
 {
 	int i, j;
+	double** C = new double* [m];
 	for (i = 0; i < m; i++)
 	{
+		C[i] = new double[n];
 		for (j = 0; j < n; j++)
 		{
 			C[i][j] = A[i][j] + (-1)*B[i][j];
 			cout << C[i][j] << endl;
 		}
 	}
-
 	return C;
 }
 
-double** multiply_vecT_vec(int m, double* vecT, double* vec, double** R)
+//repaired
+double** multiply_vecT_vec(int m, double* vecT, double* vec)
 {
 	double** R = new double* [m];
 		for (int i = 0; i < m; i++)
@@ -72,32 +101,36 @@ double** multiply_vecT_vec(int m, double* vecT, double* vec, double** R)
 		}
 		return R;
 }
-double* element_wise_multiply(int m, double* vec1, double* vec2, double* R)
+
+//repaired
+double* element_wise_multiply(int m, double* vec1, double* vec2)
 {
+	double* R = new double[m];
 	for (int i = 0; i < m; i++)
 	{
 		R[i] = vec1[i] * vec2[i];
 	}
 	return R;
 }
-double** sigmoid_matrix(int m, int n, double **x, double** Z)
-{
-	int i, j;
 
+//repaired
+double* sigmoid_vec(int m, int n, double *x)
+{
+	int i;
+	double* Z = new double[m];
 	for (i = 0; i < m; i++)
 	{
-		for (j = 0; j < n; j++)
-		{
-			Z[i][j] = 1 / (1+ exp(-x[i][j]));
-			cout << Z[i][j]<<endl;
-		}
+		Z[i] = 1 / (1+ exp(-x[i]));
+		cout << Z[i]<<endl;
 	}
 	return Z;
 }
 
-double* derivative_sigmoid_vec(int m, double* x, double* R)
+//repaired
+double* derivative_sigmoid_vec(int m, double* x)
 {
 	int i;
+	double* R = new double[m];
 	for (i = 0; i < m; i++)
 	{
 		//double e = exp(-x[i]);
@@ -108,11 +141,14 @@ double* derivative_sigmoid_vec(int m, double* x, double* R)
 	return R;
 }
 
-double** relu_matrix(int m, int n, double** x, double** Z)
+//repaired
+double** relu_matrix(int m, int n, double** x)
 {
 	int i, j;
+	double** Z = new double* [m];
 	for (i = 0; i < m; i++)
 	{
+		Z[i] = new double[n];
 		for (j = 0; j < n; j++)
 		{
 			if (x[i][j] >= 0)
@@ -127,9 +163,11 @@ double** relu_matrix(int m, int n, double** x, double** Z)
 	return Z;
 }
 
-double* derivative_relu_vec(int m, double*x, double* R)
+//repaired
+double* derivative_relu_vec(int m, double*x)
 {
 	int i;
+	double* R = new double[m];
 	for (i = 0; i < m; i++)
 	{
 		if (x[i] < 0)
@@ -144,6 +182,7 @@ double* derivative_relu_vec(int m, double*x, double* R)
 	return R;
 }
 
+//repaired
 double** initialize_layer_weights(int m, int n)
 {
 	srand(time(0));
@@ -159,6 +198,8 @@ double** initialize_layer_weights(int m, int n)
 	return matrix;
 
 }
+
+//repaired
 double* initialize_layer_bias(int m)
 {
 	srand(time(0));
@@ -172,6 +213,7 @@ double* initialize_layer_bias(int m)
 
 }
 
+//repaired
 double* zeros_1d(int m)
 {
 	srand(time(0));
@@ -184,7 +226,8 @@ double* zeros_1d(int m)
 	return vector;
 
 }
-//pochodne dla funkcji aktywacyjnej obu
+
+//repaired
 double** zeros_2d(int m, int n)
 {
 	double** matrix = new double* [m];
@@ -237,7 +280,7 @@ int main()
 		}
 	}
 
-	sigmoid_matrix(2, 3, matrix_sum1, matrix_result);
+	//sigmoid_matrix(2, 3, matrix_sum1, matrix_result);
 	//add_matrices(2, 3, matrix_sum1, matrix_sum2, matrix_result);
 	cout << endl;
 	//substract_matrices(2, 3, matrix_sum1, matrix_sum2, matrix_result);
