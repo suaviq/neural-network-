@@ -6,13 +6,5 @@ using namespace std;
 
 class NeuralNetwork 
 {
-private:
-	double learning_rate;
-public:
-	void forward_propagation();
-	void backward_propagation();
-	void calculate_error();
-	void update_weights();
-	void train();
 
 };

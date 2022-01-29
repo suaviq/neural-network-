@@ -42,8 +42,8 @@ public:
 	}
 	double* backward(double** W_next, double* delta_w_next, double* b_next, double delta_b_next) {
 		// error_w = W_next * delta_w_next
-		// delta_w -> error_w . activation_derivative(a) . -> mnozenie in place [1, 2, 3] . [2, 2, 2] = [1*2, 2*2, 3*2=
-		// W -> W - learning_rate * delta * a_prev.T -> [1, 2] * [1, 2].T
+		// delta_w -> error_w . activation_derivative(a) . -> element wise multiplications [1, 2, 3] . [2, 2, 2] = [1*2, 2*2, 3*2=
+		// W -> W - learning_rate * a_prev.T * delta  -> [1, 2].T * [1, 2] = matrix
 		// error_b = b_next * delta_b_next
 		// delta_b = error_b * activation_derivative(a)
 		// b -> b - learning_rate * delta_b

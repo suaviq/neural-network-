@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include <cstdlib>
 #include <ctime>
+#include<cmath>
 
 using namespace std;
 
@@ -58,6 +59,27 @@ double** substract_matrices(int m, int n, double** A, double** B, double** C)
 	return C;
 }
 
+double** multiply_vecT_vec(int m, double* vecT, double* vec, double** R)
+{
+	double** R = new double* [m];
+		for (int i = 0; i < m; i++)
+		{
+			R[i] = new double[m];
+			for (int j = 0; j < m; j++)
+			{
+				R[i][j] = vecT[i] * vec[j];
+			}
+		}
+		return R;
+}
+double* element_wise_multiply(int m, double* vec1, double* vec2, double* R)
+{
+	for (int i = 0; i < m; i++)
+	{
+		R[i] = vec1[i] * vec2[i];
+	}
+	return R;
+}
 double** sigmoid_matrix(int m, int n, double **x, double** Z)
 {
 	int i, j;
@@ -66,11 +88,24 @@ double** sigmoid_matrix(int m, int n, double **x, double** Z)
 	{
 		for (j = 0; j < n; j++)
 		{
-			Z[i][j] = 1 / (exp(x[i][j])+1);
+			Z[i][j] = 1 / (1+ exp(-x[i][j]));
 			cout << Z[i][j]<<endl;
 		}
 	}
 	return Z;
+}
+
+double* derivative_sigmoid_vec(int m, double* x, double* R)
+{
+	int i;
+	for (i = 0; i < m; i++)
+	{
+		//double e = exp(-x[i]);
+		//double denominator = e + 1;
+		//R[i] = e / (pow(denominator, 2)
+		R[i] = exp(-x[i]) / ((exp(-x[i])+1)* (exp(-x[i]) + 1));
+	}
+	return R;
 }
 
 double** relu_matrix(int m, int n, double** x, double** Z)
@@ -90,6 +125,23 @@ double** relu_matrix(int m, int n, double** x, double** Z)
 		}
 	}
 	return Z;
+}
+
+double* derivative_relu_vec(int m, double*x, double* R)
+{
+	int i;
+	for (i = 0; i < m; i++)
+	{
+		if (x[i] < 0)
+		{
+			R[i] = 0.0;
+		}
+		else
+		{
+			R[i] = 1.0;
+		}
+	}
+	return R;
 }
 
 double** initialize_layer_weights(int m, int n)
