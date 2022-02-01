@@ -8,7 +8,7 @@
 using namespace std;
 
 // correct
-double* multiply_mat_vec(int m, int n, double **matrix, double *vector)
+double* multiply_matrix_by_vector(int m, int n, double **matrix, double *vector)
 {
 	double *result = new double[m];
 	for (int i = 0; i < m; i++)
@@ -31,7 +31,7 @@ double* multiply_mat_vec(int m, int n, double **matrix, double *vector)
 	return result;
 }
 
-double** multiply_matrix_by_constant(int m, int n, double constant, double** matrix)
+double** multiply_matrix_by_constant(int m, int n, double** matrix, double constant)
 {
 	double** R = new double* [m];
 	for (int i = 0; i < m; i++)
@@ -44,7 +44,7 @@ double** multiply_matrix_by_constant(int m, int n, double constant, double** mat
 	}
 }
 
-double* multiply_vector_by_constant(int m, double constant, double* vector)
+double* multiply_vector_by_constant(int m, double* vector, double constant)
 {
 	double* R = new double[m];
 	for (int i = 0; i < m; i++)
@@ -87,8 +87,42 @@ double** substract_matrices(int m, int n, double** A, double** B)
 	return C;
 }
 
+double* substract_constant_from_vector(int m, double constant, double* A)
+{
+	int i;
+	double* result = new double[m];
+	for (i = 0; i < m; i++)
+	{
+		result[i] = A[i] - constant;
+	}
+	return result;
+}
+
+
+double* substract_vectors(int m, double* A, double* B)
+{
+	int i;
+	double* result = new double[m];
+	for (i = 0; i < m; i++)
+	{
+		result[i] = A[i] - B[i];
+	}
+	return result;
+}
+
+double* add_vectors(int m, double* A, double* B)
+{
+	int i;
+	double* result = new double[m];
+	for (i = 0; i < m; i++)
+	{
+		result[i] = A[i] + B[i];
+	}
+	return result;
+}
+
 //repaired
-double** multiply_vecT_vec(int m, double* vecT, double* vec)
+double** multiply_vectorT_by_vector(int m, double* vecT, double* vec)
 {
 	double** R = new double* [m];
 		for (int i = 0; i < m; i++)
@@ -100,6 +134,16 @@ double** multiply_vecT_vec(int m, double* vecT, double* vec)
 			}
 		}
 		return R;
+}
+
+double multiply_vectorT_by_constant(int m, double* vecT, double constant)
+{
+	double sum = 0;
+	for (int i = 0; i < m; i++)
+	{
+		sum += vecT[i] * constant;
+	}
+	return sum;
 }
 
 //repaired
@@ -114,7 +158,7 @@ double* element_wise_multiply(int m, double* vec1, double* vec2)
 }
 
 //repaired
-double* sigmoid_vec(int m, int n, double *x)
+double* sigmoid_vector(int m, double *x)
 {
 	int i;
 	double* Z = new double[m];
@@ -127,7 +171,7 @@ double* sigmoid_vec(int m, int n, double *x)
 }
 
 //repaired
-double* derivative_sigmoid_vec(int m, double* x)
+double* derivative_sigmoid_vector(int m, double* x)
 {
 	int i;
 	double* R = new double[m];
@@ -141,30 +185,24 @@ double* derivative_sigmoid_vec(int m, double* x)
 	return R;
 }
 
-//repaired
-double** relu_matrix(int m, int n, double** x)
+// MA BYĆ WEKTOREM
+double* relu_vector(int m, double* x)
 {
 	int i, j;
-	double** Z = new double* [m];
+	double* Z = new double [m];
 	for (i = 0; i < m; i++)
 	{
-		Z[i] = new double[n];
-		for (j = 0; j < n; j++)
+		if (x[i] >= 0)
 		{
-			if (x[i][j] >= 0)
-			{
-				Z[i][j] = x[i][j];
-			}
-			else Z[i][j] = 0.0;
-
-			cout << Z[i][j]<<endl;
+			Z[i] = x[i];
 		}
+		else Z[i] = 0.0;
 	}
 	return Z;
 }
 
-//repaired
-double* derivative_relu_vec(int m, double*x)
+// DOBRZE
+double* derivative_relu_vector(int m, double*x)
 {
 	int i;
 	double* R = new double[m];
