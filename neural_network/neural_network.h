@@ -8,5 +8,6 @@ using namespace std;
 
 class NeuralNetwork 
 {
-
+	//fit: (forward + backward)*n 2 for
+	//predict: only forward 1 for
 };
