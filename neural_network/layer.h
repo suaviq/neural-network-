@@ -106,15 +106,6 @@ public:
 		this->b = substract_vectors(neurons_curr, this->b, element_wise_multiply(this->neurons_curr, this->b, this->delta));
 		cout_vector(this->neurons_curr, this->b);
 	}
-	~Layer() {
-		delete this->W;
-		delete this->b;
-		delete this->z;
-		delete this->a;
-		delete this->a_prev;
-		delete this->delta;
-		delete this->error;
-	}
 
 	double* access_a()
 	{
@@ -176,18 +167,10 @@ public:
 		cout_vector(this->neurons_curr, this->b);
 	
 	}
-	~OutputLayer() {
-		delete this->W;
-		delete this->b;
-		delete this->z;
-		delete this->a;
-		delete this->a_prev;
-		delete this->delta;
-		delete this->error;
-	}
+
+
 };
 
-//nie działa
 void test_layer() {
 	double x_raw[2] = { 1, 2};
 	double y_raw[1] = { 0.5 };
@@ -203,7 +186,7 @@ void test_layer() {
 		y[i] = y_raw[i];
 	}
 
-	Layer hidden_layer = Layer(2,2,"relu",0.01);
+	Layer hidden_layer = Layer(2, 2, "relu", 0.01);
 	OutputLayer out_layer = OutputLayer(1, 2, "sigmoid", 0.01);
 
 	hidden_layer.forward(2, x);
@@ -212,6 +195,7 @@ void test_layer() {
 	out_layer.backward(y);
 	hidden_layer.backward(out_layer.access_neurons_curr(), out_layer.access_W(), out_layer.access_b(), out_layer.access_delta());
 	
+	delete x, y;
 	/*double* x = new double[5];
 	for (int i = 0; i < 5; i++) {
 		x[i] = x_raw[i];
