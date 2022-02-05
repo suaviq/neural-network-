@@ -21,6 +21,8 @@ protected:
 
 public:
 
+	Layer(){}
+	
 	Layer(int neurons_curr, int neurons_prev, string activation, double learning_rate)
 	{
 		this->neurons_curr = neurons_curr;
@@ -40,26 +42,26 @@ public:
 	double* forward(int neurons_prev, double* a_prev) {
 		// z -> a_prev * W + b
 		// a -> activation(z)
-		cout << "calculate z" << endl;
+		// cout << "calculate z" << endl;
 		this->z = multiply_matrix_by_vector(this->neurons_curr, neurons_prev, this->W, a_prev);
-		cout_vector(this->neurons_curr, this->z);
-		cout << endl;
+		// cout_vector(this->neurons_curr, this->z);
+		// cout << endl;
 
-		cout << "calculate a" << endl;
+		// cout << "calculate a" << endl;
 		if (this->activation_function == "sigmoid") {
 			this->a = sigmoid_vector(this->neurons_curr, this->z);
-			cout_vector(this->neurons_curr, this->a);
+			// cout_vector(this->neurons_curr, this->a);
 		}
 		else if (this->activation_function == "relu") {
 			this->a = relu_vector(this->neurons_curr, this->z);
-			cout_vector(this->neurons_curr, this->a);
+			// cout_vector(this->neurons_curr, this->a);
 		}
 		else {
 			throw invalid_argument("Activation function must be either 'sigmoid' or 'relu'");
 		}
 
 		this->a_prev = a_prev;
-		cout << endl << endl;
+		// cout << endl << endl;
 		return this->a;
 	}
 
@@ -75,38 +77,40 @@ public:
 		// b -> b - learning_rate * delta_b
 
 		//weight
-		cout << "calculate error" << endl;
+		// cout << "calculate error" << endl;
 		double **W_nextT = transpose(neurons_next, this->neurons_curr, W_next);
 		this->error = multiply_matrix_by_vector(this->neurons_curr, neurons_next, W_nextT, delta_next);
-		cout_vector(this->neurons_curr, this->error);
+		// cout_vector(this->neurons_curr, this->error);
 
 		//delta
-		cout << "calculate delta" << endl;
+		// cout << "calculate delta" << endl;
 		if (this->activation_function == "sigmoid") {
 			this->delta = element_wise_multiply(this->neurons_curr, this->error, derivative_sigmoid_vector(this->neurons_curr, this->a)); 
-			cout_vector(this->neurons_curr, this->delta);
+			// cout_vector(this->neurons_curr, this->delta);
 		}
 		else if (this->activation_function == "relu") {
 			this->delta = element_wise_multiply(this->neurons_curr, this->error, derivative_relu_vector(this->neurons_curr, this->a));
-			cout_vector(this->neurons_curr, this->delta);
+			// cout_vector(this->neurons_curr, this->delta);
 		}
 		else {
 			throw invalid_argument("Activation function must be either 'sigmoid' or 'relu'");
 		}
 		
 		//update weights
-		cout << "update weights" << endl;
-		double** w = multiply_vectorT_by_vector(this->neurons_curr, this->a_prev, this->delta);
+		// cout << "update weights" << endl;
+		double** w = multiply_vectorT_by_vector(this->neurons_curr, this->neurons_prev, this->delta, this->a_prev);
 		double** w1 = multiply_matrix_by_constant(this->neurons_curr, this->neurons_prev, w, this->learning_rate);
 		this->W = substract_matrices(this->neurons_curr, this->neurons_prev, this->W, w1);
-		cout_matrix(this->neurons_curr, this->neurons_prev, this->W);
+		// cout_matrix(this->neurons_curr, this->neurons_prev, this->W);
 
 		//update bias
-		cout << "update bias" << endl;
+		// cout << "update bias" << endl;
 		this->b = substract_vectors(neurons_curr, this->b, element_wise_multiply(this->neurons_curr, this->b, this->delta));
-		cout_vector(this->neurons_curr, this->b);
+		// cout_vector(this->neurons_curr, this->b);
 	}
-
+	////////////////////////////////////////////////////////////////////////////////////////////??????????????????????/
+	~Layer(){}
+	////////////////////////////////////////////////////////////////////////////////////////////?????????????????????????///
 	double* access_a()
 	{
 		return this->a;
@@ -153,18 +157,22 @@ public:
 		else {
 			throw invalid_argument("Activation function must be either 'sigmoid' or 'relu'");
 		}
+		/*cout << "out layer error" << endl;
+		cout_vector(this->neurons_curr, this->error);
+		cout << "out layer delta" << endl;
+		cout_vector(this->neurons_curr, this->delta);*/
 
 		//update weights
-		cout << "update weights" << endl;
-		double** w = multiply_vectorT_by_vector(this->neurons_curr, this->a_prev, this->delta);
+		// cout << "update weights" << endl;
+		double** w = multiply_vectorT_by_vector(this->neurons_curr, this->neurons_prev, this->delta, this->a_prev);
 		double** w1 = multiply_matrix_by_constant(this->neurons_curr, this->neurons_prev, w, this->learning_rate);
 		this->W = substract_matrices(this->neurons_curr, this->neurons_prev, this->W, w1);
-		cout_matrix(this->neurons_curr, this->neurons_prev, this->W);
+		// cout_matrix(this->neurons_curr, this->neurons_prev, this->W);
 
 		//update bias
-		cout << "update bias" << endl;
+		// cout << "update bias" << endl;
 		this->b = substract_vectors(neurons_curr, this->b, element_wise_multiply(this->neurons_curr, this->b, this->delta));
-		cout_vector(this->neurons_curr, this->b);
+		// cout_vector(this->neurons_curr, this->b);
 	
 	}
 
@@ -229,9 +237,9 @@ void test_layer() {
 
 }
 
-int main()
+/*int main()
 {
 	test_layer();
 	// cout_matrix(2, 3, zeros_2d(2, 3));
 	// cout_matrix(3, 2, transpose(2, 3, zeros_2d(2, 3)));
-}
+}*/

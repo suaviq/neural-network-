@@ -124,13 +124,13 @@ double* add_vectors(int m, double* A, double* B)
 }
 
 //repaired
-double** multiply_vectorT_by_vector(int m, double* vecT, double* vec)
+double** multiply_vectorT_by_vector(int m, int n, double* vecT, double* vec)
 {
 	double** R = new double* [m];
 		for (int i = 0; i < m; i++)
 		{
-			R[i] = new double[m];
-			for (int j = 0; j < m; j++)
+			R[i] = new double[n];
+			for (int j = 0; j < n; j++)
 			{
 				R[i][j] = vecT[i] * vec[j];
 			}
@@ -233,7 +233,7 @@ double** initialize_layer_weights(int m, int n)
 		matrix[i] = new double[n];
 		for (int j = 0; j < n; j++)
 		{
-			matrix[i][j] = double((rand() % 100) - 50)/double(100);
+			matrix[i][j] = double((rand() % 100) - 50)/double(1000);
 		}
 	}
 	return matrix;
@@ -247,7 +247,7 @@ double* initialize_layer_bias(int m)
 	double* vector = new double[m];
 	for (int i = 0; i < m; i++) 
 	{
-		vector[i] = double((rand() % 100) - 50) / double(100);
+		vector[i] = double((rand() % 100) - 50) / double(1000);
 	}
 	return vector;
 
