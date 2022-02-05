@@ -2,6 +2,8 @@
 #include <string>
 #include "matrices_vectors.h"
 #include "layer.h"
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 //neural network as a list of layers 
@@ -33,7 +35,7 @@ public:
 		this->output_layer = output_layer;
 	}
 
-	void fit(int epochs, double** X, double** y, int m)			//
+	void fit(int epochs, double** X, double** y, int m)			
 	{
 		/*m -> wielkosc datasetu/ ilosc elementow w datasetcie
 		n -> wielkosc jednego elementu w datasetcie, np X[0] = [1, 2, 3] --> n = 3*/
@@ -42,7 +44,7 @@ public:
 		{
 			for (int i = 0; i < m; i++) 
 			{
-				cout << "\r" << "epoch: " << epoch << " progress: " << i;
+				cout << "\r" << "epoch: " << epoch << " progress: " << i*20 <<"%";
 				// forward
 				this->hidden_layers[0].forward(this->input_size, X[i]);
 				for (int l = 1; l < this->n_layers; l++)
@@ -64,8 +66,7 @@ public:
 		}
 	}
 
-//fit: (forward + backward)*n 2 for
-//predict: only forward 1 for
+
 	double** predict(double** X, int m)
 	{
 		double** predicted = new double* [m];
@@ -95,6 +96,33 @@ public:
 		return predicted;
 	}
 };
+
+
+double** read_matrix_txt(int a, int b, string file_name)
+{
+	double** result = new double* [a];
+	ifstream file;
+	file.open(file_name);
+	if (file.is_open())
+	{
+		for (int i = 0; i < a; i++)
+		{
+			result[i] = new double[b];
+			for (int j = 0; j < b; j++)
+			{
+				file >> result[i][j];
+				//cout << result[i][j] << '\t';
+			}
+		}
+	}
+	else
+	{
+		cout << "Problem with opening the file" << endl;
+	}
+	file.close();
+	return result;
+}
+
 
 
 

@@ -7,7 +7,6 @@
 
 using namespace std;
 
-// correct + print
 double* multiply_matrix_by_vector(int m, int n, double **matrix, double *vector)
 {
 	double *result = new double[m];
@@ -31,7 +30,6 @@ double* multiply_matrix_by_vector(int m, int n, double **matrix, double *vector)
 	return result;
 }
 
-//print
 double** multiply_matrix_by_constant(int m, int n, double** matrix, double constant)
 {
 	double** R = new double* [m];
@@ -46,7 +44,6 @@ double** multiply_matrix_by_constant(int m, int n, double** matrix, double const
 	return R;
 }
 
-//print 
 double* multiply_vector_by_constant(int m, double* vector, double constant)
 {
 	double* R = new double[m];
@@ -57,7 +54,6 @@ double* multiply_vector_by_constant(int m, double* vector, double constant)
 	return R;
 }
  
-// repaired + print
 double** add_matrices(int m, int n, double **A, double **B)
 {
 	int i, j;
@@ -73,7 +69,6 @@ double** add_matrices(int m, int n, double **A, double **B)
 	return C;
 }
 
-//repaired
 double** substract_matrices(int m, int n, double** A, double** B)
 {
 	int i, j;
@@ -123,7 +118,6 @@ double* add_vectors(int m, double* A, double* B)
 	return result;
 }
 
-//repaired
 double** multiply_vectorT_by_vector(int m, int n, double* vecT, double* vec)
 {
 	double** R = new double* [m];
@@ -148,7 +142,6 @@ double multiply_vectorT_by_constant(int m, double* vecT, double constant)
 	return sum;
 }
 
-//repaired
 double* element_wise_multiply(int m, double* vec1, double* vec2)
 {
 	double* R = new double[m];
@@ -159,7 +152,6 @@ double* element_wise_multiply(int m, double* vec1, double* vec2)
 	return R;
 }
 
-//repaired
 double* sigmoid_vector(int m, double *x)
 {
 	int i;
@@ -171,7 +163,6 @@ double* sigmoid_vector(int m, double *x)
 	return Z;
 }
 
-//repaired
 double* derivative_sigmoid_vector(int m, double* x)
 {
 	int i;
@@ -186,7 +177,6 @@ double* derivative_sigmoid_vector(int m, double* x)
 	return R;
 }
 
-// MA BYĆ WEKTOREM
 double* relu_vector(int m, double* x)
 {
 	int i, j;
@@ -205,7 +195,6 @@ double* relu_vector(int m, double* x)
 	return Z;
 }
 
-// DOBRZE
 double* derivative_relu_vector(int m, double*x)
 {
 	int i;
@@ -224,7 +213,6 @@ double* derivative_relu_vector(int m, double*x)
 	return R;
 }
 
-//repaired
 double** initialize_layer_weights(int m, int n)
 {
 	srand(time(0));
@@ -240,7 +228,6 @@ double** initialize_layer_weights(int m, int n)
 
 }
 
-//repaired
 double* initialize_layer_bias(int m)
 {
 	srand(time(0));
@@ -253,7 +240,6 @@ double* initialize_layer_bias(int m)
 
 }
 
-//repaired
 double* zeros_1d(int m)
 {
 	double* vector = new double[m];
@@ -265,7 +251,6 @@ double* zeros_1d(int m)
 
 }
 
-//repaired
 double** zeros_2d(int m, int n)
 {
 	double** matrix = new double* [m];
@@ -300,7 +285,6 @@ void cout_vector(int m, double* V)
 	cout << endl;
 }
 
-// todo
 double** transpose(int m, int n, double **M) 
 {
 	double** matrixT = new double* [n];

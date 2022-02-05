@@ -12,7 +12,7 @@ protected:
 	double** W; // weights
 	double* b; // bias
 	double* z; // neuron value
-	double* a; // neuron value before activation ?? bylo napisane after zgupialam
+	double* a; // neuron value before activation 
 	double* a_prev; // neuron value after activation
 	double* delta; // delta
 	double* error; // error
@@ -108,9 +108,9 @@ public:
 		this->b = substract_vectors(neurons_curr, this->b, element_wise_multiply(this->neurons_curr, this->b, this->delta));
 		// cout_vector(this->neurons_curr, this->b);
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////??????????????????????/
+
 	~Layer(){}
-	////////////////////////////////////////////////////////////////////////////////////////////?????????????????????????///
+
 	double* access_a()
 	{
 		return this->a;
@@ -143,8 +143,8 @@ public:
 	using Layer::Layer;
 	using Layer::forward;
 	double* backward(double* y) {
-		// error -> a - y									wektor
-		// delta -> error_w* activation_derivative(a)		probably element wise multiply
+		// error -> a - y									
+		// delta -> error_w* activation_derivative(a)		
 		// 
 		//weight
 		this->error = substract_vectors(this->neurons_curr, this->a, y);
@@ -236,10 +236,3 @@ void test_layer() {
 	test1.backward(4, W_next, b_next, delta_next);*/
 
 }
-
-/*int main()
-{
-	test_layer();
-	// cout_matrix(2, 3, zeros_2d(2, 3));
-	// cout_matrix(3, 2, transpose(2, 3, zeros_2d(2, 3)));
-}*/
