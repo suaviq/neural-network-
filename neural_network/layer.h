@@ -12,8 +12,8 @@ protected:
 	double** W; // weights
 	double* b; // bias
 	double* z; // neuron value
-	double* a; // neuron value before activation 
-	double* a_prev; // neuron value after activation
+	double* a; // neuron value after activation 
+	double* a_prev; // neuron value after activation previous layer
 	double* delta; // delta
 	double* error; // error
 	double learning_rate;
@@ -70,11 +70,7 @@ public:
 		// error = W_next * delta_next + b_next * delta_next
 		// delta -> error . activation_derivative(a) . -> element wise multiplications [1, 2, 3] . [2, 2, 2] = [1*2, 2*2, 3*2]
 		// W -> W - learning_rate * a_prev.T * delta  -> [1, 2].T * [1, 2] = matrix
-		// error_b = b_next * delta_b_next
-		// 
-		// delta_b = error_b (vec) * activation_derivative(a)
-		// 
-		// b -> b - learning_rate * delta_b
+		// b -> b - learning_rate * delta
 
 		//weight
 		// cout << "calculate error" << endl;
