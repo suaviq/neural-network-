@@ -2,6 +2,6 @@
 D:\neural_network\neural-network-\neural_network\matrices_vectors.h(182,9): warning C4101: 'j': unreferenced local variable
 D:\neural_network\neural-network-\neural_network\matrices_vectors.h(218,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 D:\neural_network\neural-network-\neural_network\matrices_vectors.h(233,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\neural_network\neural-network-\neural_network\layer.h(177): warning C4715: 'OutputLayer::backward': not all control paths return a value
-D:\neural_network\neural-network-\neural_network\layer.h(110): warning C4715: 'Layer::backward': not all control paths return a value
+D:\neural_network\neural-network-\neural_network\layer.h(173): warning C4715: 'OutputLayer::backward': not all control paths return a value
+D:\neural_network\neural-network-\neural_network\layer.h(106): warning C4715: 'Layer::backward': not all control paths return a value
   neural_network.vcxproj -> D:\neural_network\neural-network-\x64\Debug\neural_network.exe

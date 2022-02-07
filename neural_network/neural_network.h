@@ -37,8 +37,8 @@ public:
 
 	void fit(int epochs, double** X, double** y, int m)			
 	{
-		/*m -> wielkosc datasetu/ ilosc elementow w datasetcie
-		n -> wielkosc jednego elementu w datasetcie, np X[0] = [1, 2, 3] --> n = 3*/
+		/*m -> size of dataset/number of elements in dataset
+		n -> size of one element in dataset, np X[0] = [1, 2, 3] --> n = 3*/
 
 		for (int epoch = 0; epoch < epochs; epoch++)
 		{

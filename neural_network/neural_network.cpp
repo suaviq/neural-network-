@@ -8,6 +8,10 @@ using namespace std;
 
 int main()
 {
+	// task for neural network is simple
+	// so we don't need many layer because neural network won't train 
+	// vanishing gradients - gradients becomes so smalll that it keeps weights from changing their values
+	// in worst case, it can stop neural network from futher training
 	NeuralNetwork nn = NeuralNetwork(1, 1, 1, 2, 0.01);
 
 	double** X_train = read_matrix_txt(6, 2, "D:/neural_network/neural-network-/raw_matrix_x.txt");
